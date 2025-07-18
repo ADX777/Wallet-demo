@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Secure Wallet</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="container">
+    <h1>🛡️ Create Secure Crypto Wallet</h1>
+
+    <label>Wallet Name (optional)</label>
+    <input type="text" id="walletName" placeholder="Wallet 1"/>
+
+    <label>Recovery Phrase</label>
+    <select id="wordCount">
+      <option value="12" selected>12 words</option>
+      <option value="15">15 words</option>
+      <option value="18">18 words</option>
+      <option value="21">21 words</option>
+      <option value="24">24 words</option>
+    </select>
+
+    <label><input type="checkbox" id="usePassphrase"/> Enable Passphrase</label>
+    <input type="password" id="passphraseInput" placeholder="Enter your passphrase" disabled/>
+
+    <button onclick="createWallet()">Create</button>
+
+    <div id="output"></div>
+  </div>
+
+  <!-- Thư viện -->
+  <script src="https://cdn.jsdelivr.net/npm/bip39@3.0.4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.8.1/dist/ethers.umd.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
