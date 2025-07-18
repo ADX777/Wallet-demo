@@ -10,26 +10,15 @@ async function createWallet() {
       return;
     }
 
-    console.log("🔧 Word count:", wordCount);
-    console.log("🔐 Passphrase enabled:", usePass);
-    console.log("📛 Wallet name:", walletName);
-
     const entropyBits = wordCount * 11;
     const entropyBytes = entropyBits / 8;
     const entropy = ethers.utils.randomBytes(entropyBytes);
+    const hexEntropy = ethers.utils.hexlify(entropy).replace("0x", "");
 
-    console.log("🧠 Entropy:", entropy);
-
-    const mnemonic = bip39.entropyToMnemonic(Buffer.from(entropy).toString("hex"));
-    console.log("📝 Mnemonic:", mnemonic);
-
+    const mnemonic = bip39.entropyToMnemonic(hexEntropy);
     const seed = await bip39.mnemonicToSeed(mnemonic, usePass ? passphrase : "");
-    console.log("🌱 Seed:", seed);
-
     const hdNode = ethers.HDNodeWallet.fromSeed(seed);
     const address = hdNode.address;
-
-    console.log("✅ ETH Address:", address);
 
     document.getElementById('output').innerHTML = `
       🏷️ <strong>Wallet Name:</strong> ${walletName}<br><br>
@@ -43,7 +32,6 @@ async function createWallet() {
   }
 }
 
-// Kích hoạt ô nhập passphrase khi bật checkbox
 document.getElementById('usePassphrase').addEventListener('change', (e) => {
   document.getElementById('passphraseInput').disabled = !e.target.checked;
 });
