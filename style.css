@@ -1,0 +1,62 @@
+body {
+  background-color: #000000;
+  color: gold;
+  font-family: 'Segoe UI', sans-serif;
+  padding: 20px;
+  margin: 0;
+}
+
+.container {
+  max-width: 500px;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: gold;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  background-color: #111111;
+  color: gold;
+  border: 1px solid gold;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  background-color: gold;
+  color: black;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #e6c200;
+}
+
+#output {
+  background-color: #111;
+  color: gold;
+  margin-top: 25px;
+  padding: 15px;
+  border: 1px dashed gold;
+  border-radius: 4px;
+  word-break: break-word;
+  white-space: pre-line;
+}
