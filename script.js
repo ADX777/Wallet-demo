@@ -10,12 +10,11 @@ async function createWallet() {
       return;
     }
 
-    const entropyBits = wordCount * 11;
-    const entropyBytes = entropyBits / 8;
-    const entropy = ethers.utils.randomBytes(entropyBytes);
-    const hexEntropy = ethers.utils.hexlify(entropy).replace("0x", "");
+    // Sinh mnemonic bằng thư viện ethers (hỗ trợ sẵn 12/15/18/21/24 từ)
+    const strength = wordCount * 11;
+    const mnemonic = ethers.HDNodeWallet.createRandom({ entropyBits: strength }).mnemonic.phrase;
 
-    const mnemonic = bip39.entropyToMnemonic(hexEntropy);
+    // Dùng thư viện bip39 để tạo seed từ mnemonic + passphrase
     const seed = await bip39.mnemonicToSeed(mnemonic, usePass ? passphrase : "");
     const hdNode = ethers.HDNodeWallet.fromSeed(seed);
     const address = hdNode.address;
@@ -24,7 +23,7 @@ async function createWallet() {
       🏷️ <strong>Wallet Name:</strong> ${walletName}<br><br>
       📬 <strong>Ethereum Address:</strong><br>${address}<br><br>
       🔑 <strong>Recovery Phrase (${wordCount} words):</strong><br>${mnemonic}<br><br>
-      ⚠️ <strong>Ghi nhớ:</strong> Nếu mất passphrase (nếu có), bạn sẽ không thể khôi phục ví này.
+      ⚠️ <strong>Lưu ý:</strong> Nếu mất passphrase, bạn sẽ không thể khôi phục ví này!
     `;
   } catch (err) {
     console.error("❌ Lỗi tạo ví:", err);
